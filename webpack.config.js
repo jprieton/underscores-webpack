@@ -66,9 +66,10 @@ const plugins = (argv) => ([
 		verbose                     : true,
 		// This option allow to delete files only in the build directory,
 		// otherwise, delete all files in the root directory
+		// Modify if you know what you are doing
 		cleanOnceBeforeBuildPatterns: [
-			"*.map",
-			"dist/**/**",
+			"*.map",				// This option allow to delete all source map files in root directory
+			`${BUILD_DIR}/**/**`,   // This option allow to delete all files in your build directory
 		]
 	}),
 ])
