@@ -27,6 +27,9 @@ sed -i "s/--exclude .DS_Store/--exclude src webpack.config.js enable-webpack.sh 
 # Download a bare minimum webpack config file
 curl -o webpack.config.js https://raw.githubusercontent.com/jprieton/underscore-webpack/main/webpack.config.js
 
+# Download a bare minimum postcss config file
+curl -o webpack.config.js https://raw.githubusercontent.com/jprieton/underscore-webpack/main/postcss.config.js
+
 # Create the required directories
 mkdir -p ./src/js/
 

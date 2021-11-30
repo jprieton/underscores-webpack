@@ -49,7 +49,7 @@ The current installation of `_s` have as dependency the [@wordpress/scripts](htt
 $ npm install @wordpress/scripts@latest --save-dev
 ```
 
-Yes, only a package require to be updated.
+Yes, only a package is required to be updated.
 
 <br>
 
@@ -66,7 +66,7 @@ $ mv ./sass/ ./src/scss/
 
 <br>
 
-## Add webpack.config.js file
+## Add `webpack.config.js` file
 
 In this repository there are a bare minimum `webpack.config.js` that allows to you start to work in your theme, you can download [here](https://raw.githubusercontent.com/jprieton/underscore-webpack/main/webpack.config.js) and put it on your root theme directory or run the following command:
 
@@ -79,10 +79,19 @@ Please read this about the `CleanWebpackPlugin`.
 In this file pay attention on the initialization of `MiniCssExtractPlugin`, this configuration allow creates the `style.css` file in the root directory of the theme, any other will be created in the `dist` directory (o any other that you configure in the `BUILD_DIR`)
 
 <br>
+## Add `postcss.config.js` file
 
-## Update stylelintrc.json file
+In this repository there are a bare minimum `postcss.config.js`, you can download [here](https://raw.githubusercontent.com/jprieton/underscores-webpack/main/postcss.config.js) and put it on your root theme directory or run the following command:
 
-When the `@wordpress/scripts` package was updated, this broke the linter, this is due a [deprecated](https://www.npmjs.com/package/stylelint-config-wordpress/v/10.0.2) extension removed in the updated version of the `@wordpress/scripts` package, to fix you must edit the `stylelintrc.json` and update the new extension:
+```bash
+$ curl -o webpack.config.js https://raw.githubusercontent.com/jprieton/underscores-webpack/main/postcss.config.js
+```
+
+<br>
+
+## Update `stylelintrc.json` file
+
+When the `@wordpress/scripts` package is updated broke the linter, this is due a [deprecated](https://www.npmjs.com/package/stylelint-config-wordpress/v/10.0.2) extension removed in the updated, to fix you must edit the `stylelintrc.json` and update the new extension:
 
 ```js
 // Before
@@ -104,7 +113,7 @@ When the `@wordpress/scripts` package was updated, this broke the linter, this i
 
 <br>
 
-## Update package.json file
+## Update `package.json` file
 
 Finally it's necessary update the `scripts` property of the `package.json` file
 
@@ -175,4 +184,4 @@ $ curl -o enable-webpack.sh https://raw.githubusercontent.com/jprieton/underscor
 
 ## Bug tracker?
 
-Have a bug? Please create an issue on GitHub at https://github.com/jprieton/underscores-enable-webpack/issues
+Have a bug? Please create an issue on GitHub at https://github.com/jprieton/underscores-webpack/issues
