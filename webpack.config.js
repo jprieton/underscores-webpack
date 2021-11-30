@@ -1,5 +1,6 @@
-const path                 = require("path")
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const path                   = require("path")
+const MiniCssExtractPlugin   = require("mini-css-extract-plugin")
+const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 
 // The relative folder to the build directory
 const BUILD_DIR = 'dist'
@@ -59,6 +60,16 @@ const plugins = (argv) => ([
 		// This snippets allow to you generate style.css on root directory of theme, 
 		// otherwise, is generated dist/css/
 		"filename": ({ chunk: { name } }) => name === "style" ? "style.css" : `${BUILD_DIR}/css/[name].css`
+	}),
+	new CleanWebpackPlugin({
+		cleanStaleWebpackAssets     : true,
+		verbose                     : true,
+		// This option allow to delete files only in the build directory,
+		// otherwise, delete all files in the root directory
+		cleanOnceBeforeBuildPatterns: [
+			"*.map",
+			"dist/**/**",
+		]
 	}),
 ])
 

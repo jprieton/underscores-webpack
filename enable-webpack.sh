@@ -4,6 +4,10 @@ npm install
 # Then, update the @wordpress/scripts package to the latest version
 npm install @wordpress/scripts@latest
 
+# Create the required directories
+mkdir -p ./src/js/
+mkdir -p ./src/scss/
+
 # Move the sass folder to the src folder
 mv ./sass ./src/scss
 
@@ -20,7 +24,6 @@ sed -i "s/stylelint-config-wordpress\/scss/@wordpress\/stylelint-config\/scss/g"
 curl -o webpack.config.js https://raw.githubusercontent.com/jprieton/underscore-webpack/main/webpack.config.js
 
 # Generate the entry point script to manage the styles
-mkdir -p ./src/js/
 echo "import '../scss/style.scss';" > ./src/js/style.js
 
 # Done! It's all ready to go!
