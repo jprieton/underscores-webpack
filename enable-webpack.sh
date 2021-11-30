@@ -5,6 +5,7 @@ npm install
 npm install @wordpress/scripts@latest
 
 # Move the sass folder to the src folder
+mkdir -p ./src/
 mv ./sass/ ./src/scss/
 
 # Update the watch script in package.json file
