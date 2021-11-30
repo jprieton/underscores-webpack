@@ -21,7 +21,7 @@ curl -o webpack.config.js https://raw.githubusercontent.com/jprieton/underscore-
 
 # Generate the entry point script to manage the styles
 mkdir -p ./src/js/
-echo "import '../scss/test.scss';" > ./src/js/style.js
+echo "import '../scss/style.scss';" > ./src/js/style.js
 
 # Done! It's all ready to go!
 echo "Done!"
