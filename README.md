@@ -178,7 +178,7 @@ If you have a better configuration don't hesitate in create a issue
 Yes, you can download [here](https://raw.githubusercontent.com/jprieton/underscore-webpack/main/enable-webpack.sh) the bash script o run:
 
 ```bash
-$ curl -o enable-webpack.sh https://raw.githubusercontent.com/jprieton/underscore-webpack/main/enable-webpack.sh | bash
+$ curl https://raw.githubusercontent.com/jprieton/underscore-webpack/main/enable-webpack.sh | bash
 ```
 
 <br>
