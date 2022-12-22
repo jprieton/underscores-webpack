@@ -85,7 +85,7 @@ In this file pay attention on the initialization of `MiniCssExtractPlugin`, this
 In this repository there are a bare minimum `postcss.config.js`, you can download [here](https://raw.githubusercontent.com/jprieton/underscores-webpack/main/postcss.config.js) and put it on your root theme directory or run the following command:
 
 ```shell-script
-$ curl -o webpack.config.js https://raw.githubusercontent.com/jprieton/underscores-webpack/main/postcss.config.js
+$ curl -o postcss.config.js https://raw.githubusercontent.com/jprieton/underscores-webpack/main/postcss.config.js
 ```
 
 <br>
