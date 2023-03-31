@@ -26,7 +26,7 @@ There are several ways to create your underscore based theme
 
   ```shell-script
   # Example
-  $ wp scaffold _s sample-theme --theme_name="Sample Theme" --author="John Doe" --sassify
+  wp scaffold _s sample-theme --theme_name="Sample Theme" --author="John Doe" --sassify
   ```
   
 - Or download from GitHub [repository](https://github.com/automattic/_s).
@@ -34,8 +34,8 @@ There are several ways to create your underscore based theme
 To start using all the tools that come with `_s` you need to install the necessary Node.js and Composer dependencies, go to your theme root directory and execute in terminal the following command:
 
 ```shell-script
-$ composer install
-$ npm install
+composer install
+npm install
 ```
 
 <br>
@@ -43,10 +43,10 @@ $ npm install
 
 ## Update the packages
 
-The current installation of `_s` have as dependency the [@wordpress/scripts](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/), this version uses webpack 4.x, we need update to latest version to use webpack 5.x in our project, to do this execute in terminal the following command:
+The current installation of `_s` have as dependency the [@wordpress/scripts](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/), this version uses webpack 4.x, we need update to latest version to use webpack 5.x in our project, to do this and avoid the *Fix the upstream dependency conflict* we need uninstall and reinstall the @wordpress/scripts package, then execute in terminal the following command:
 
 ```shell-script
-$ npm install @wordpress/scripts@latest --save-dev
+npm remove @wordpress/scripts && npm install @wordpress/scripts --save-dev
 ```
 
 Yes, only a package is required to be updated.
@@ -60,8 +60,8 @@ It's a personal preference, I'm like have all sources in the `src` folder.
 To do this run:
 
 ```shell-script
-$ mkdir ./src/
-$ mv ./sass/ ./src/scss/
+mkdir ./src/
+mv ./sass/ ./src/scss/
 ```
 
 <br>
@@ -71,12 +71,14 @@ $ mv ./sass/ ./src/scss/
 In this repository there are a bare minimum `webpack.config.js` that allows to you start to work in your theme, you can download [here](https://raw.githubusercontent.com/jprieton/underscore-webpack/main/webpack.config.js) and put it on your root theme directory or run the following command:
 
 ```shell-script
-$ curl -o webpack.config.js https://raw.githubusercontent.com/jprieton/underscores-webpack/main/webpack.config.js
+curl -o webpack.config.js https://raw.githubusercontent.com/jprieton/underscores-webpack/main/webpack.config.js
 ```
 
 Please read this about the `CleanWebpackPlugin`.
 
 In this file pay attention on the initialization of `MiniCssExtractPlugin`, this configuration allow creates the `style.css` file in the root directory of the theme, any other will be created in the `dist` directory (o any other that you configure in the `BUILD_DIR`)
+
+if you check *WooCommerce boilerplate* option when you generate your theme, uncomment the `woocomerce` entry point
 
 <br>
 
@@ -85,31 +87,7 @@ In this file pay attention on the initialization of `MiniCssExtractPlugin`, this
 In this repository there are a bare minimum `postcss.config.js`, you can download [here](https://raw.githubusercontent.com/jprieton/underscores-webpack/main/postcss.config.js) and put it on your root theme directory or run the following command:
 
 ```shell-script
-$ curl -o postcss.config.js https://raw.githubusercontent.com/jprieton/underscores-webpack/main/postcss.config.js
-```
-
-<br>
-
-## Update `stylelintrc.json` file
-
-When the `@wordpress/scripts` package is updated broke the linter, this is due a [deprecated](https://www.npmjs.com/package/stylelint-config-wordpress/v/10.0.2) extension removed in the updated, to fix you must edit the `stylelintrc.json` and update the new extension:
-
-```javascript
-// Before
-{
-  "extends": [
-    "stylelint-config-wordpress/scss" // <-- Old extension
-  ],
-  // Other settings
-}
-
-// After
-{
-  "extends": [
-    "@wordpress/stylelint-config/scss" // <-- New extension
-  ],
-  // Other settings
-}
+curl -o postcss.config.js https://raw.githubusercontent.com/jprieton/underscores-webpack/main/postcss.config.js
 ```
 
 <br>
@@ -138,10 +116,10 @@ Finally it's necessary update the `scripts` property of the `package.json` file
   // Other settings
   "scripts": {
     // Other scripts
-    "watch": "webpack  --watch --mode=development",
+    "watch": "webpack --watch --mode=development",
     "compile:css": "webpack --mode=production && stylelint '*.css' --fix || true && stylelint '*.css' --fix",
     // Update this lines only if you moved the sass directory to src folder
- 	"lint:scss": "wp-scripts lint-style 'src/scss/**/*.scss'",
+    "lint:scss": "wp-scripts lint-style 'src/scss/**/*.scss'",
     // Other scripts
   }
   // Other settings
@@ -149,6 +127,21 @@ Finally it's necessary update the `scripts` property of the `package.json` file
 ```
 
 And that's is all, you must be capable of run any of the scripts without issues. From here you can customize you webpack environment as you like 
+
+<br>
+
+## Generate entry poitns
+
+In the `webpack.config.js` file there are two entry points `styles` and `woocommerce` (commented, uncomment if you check *WooCommerce boilerplate* option when you generate your theme), we need create the files associated to these entry points
+
+```bash
+# Create the required directories
+mkdir -p ./src/js/
+
+# Generate the entry point script to manage the styles
+echo "import '../scss/style.scss';" > ./src/js/style.js
+echo "import '../scss/woocommerce.scss';" > ./src/js/woocommerce.js
+```
 
 <br>
 
@@ -169,7 +162,7 @@ Since the build folder in our webpack.config.js is same the root of our theme, e
 
 You can read in detail how to configure this plugin and other options [here](https://github.com/johnagan/clean-webpack-plugin), please take a look if you are no sure about your configuration is safe or if you need check if all is OK.
 
-If you have a better configuration don't hesitate in create a issue
+If you have a better configuration or you can improve this document don't hesitate in create a issue ticket.
 
 <br>
 

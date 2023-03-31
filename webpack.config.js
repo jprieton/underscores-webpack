@@ -8,6 +8,8 @@ const BUILD_DIR = 'dist'
 const entry = {
 	// Entry point to generate root stylesheet of theme
 	"style": path.resolve(__dirname, "src/js/style.js"),
+	// Add here your entry point to generate woocommerce stylesheet
+	// "woocommerce": path.resolve(__dirname, "src/js/woocommerce.js"),
 }
 
 const output = {
