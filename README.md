@@ -6,7 +6,9 @@ Please read the entire guide carefully to understand the steps involved in this 
 
 <br>
 
-> **Important notes:** For this guide I will use a clean installation of [_s](https://underscores.me/) starter theme.
+> **Note**
+>  
+> For this guide I will use a clean installation of [_s](https://underscores.me/) starter theme.
 >
 > This guide only cover the SASS watcher, other topics, as bundle scripts, are treated superficially.
 >
@@ -145,9 +147,16 @@ echo "import '../scss/woocommerce.scss';" > ./src/js/woocommerce.js
 
 <br>
 
-## `CleanWebpackPlugin` workaround 
+## `CleanWebpackPlugin` workaround :warning:	
 
-> **Important notes**: This step it is not required if you starts a clean installation of _s theme and download the `webpack.config.js` from this repository, but if you are working in a preexistent theme, please read carefully this instructions, make a backup and double check the configuration of the *CleanWebpackPlugin* before run webpack
+> **Note**
+> 
+> This step it is not required if you starts a clean installation of _s theme and download the `webpack.config.js` from this repository, 
+
+
+> **Warning**
+> 
+> If you are working in a preexistent theme, please read carefully this instructions, make a backup and double check the configuration of the *CleanWebpackPlugin* before run webpack, **you can lose your files if you set the incorrect path to clean!**
 
  Since the build folder in our `webpack.config.js` is same the root of our theme, enable `CleanWebpackPlugin` with default configuration all files and folders in your theme will be deleted! (`.git` folder is erased too!), it's necessary define what folder the plugin can clean, in our `webpack.config.js` are ready 
 
@@ -173,7 +182,7 @@ If you have a better configuration or you can improve this document don't hesita
 Yes, you can download [here](https://raw.githubusercontent.com/jprieton/underscore-webpack/main/enable-webpack.sh) the bash script o run:
 
 ```bash
-$ curl https://raw.githubusercontent.com/jprieton/underscore-webpack/main/enable-webpack.sh | bash
+curl https://raw.githubusercontent.com/jprieton/underscore-webpack/main/enable-webpack.sh | bash
 ```
 
 <br>
