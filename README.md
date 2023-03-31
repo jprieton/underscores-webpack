@@ -20,7 +20,7 @@ Please read the entire guide carefully to understand the steps involved in this 
 
 There are several ways to create your underscore based theme
 
-- Generate a  from the [underscore](https://underscores.me/) site, remember check the *sassify* option,
+- Generate a  from the [underscore](https://underscores.me/) site, remember check the *sassify* option (recommended),
 
 - Using the command line interface WP-CLI, read more [here](https://developer.wordpress.org/cli/commands/scaffold/_s/) how to use the `scaffold` command, remember use the `-sassify` option, you can execute a command similar to this on the root of your WordPress installation,
 
@@ -33,7 +33,7 @@ There are several ways to create your underscore based theme
 
 To start using all the tools that come with `_s` you need to install the necessary Node.js and Composer dependencies, go to your theme root directory and execute in terminal the following command:
 
-```shell-script
+```bash
 composer install
 npm install
 ```
@@ -45,7 +45,7 @@ npm install
 
 The current installation of `_s` have as dependency the [@wordpress/scripts](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/), this version uses webpack 4.x, we need update to latest version to use webpack 5.x in our project, to do this and avoid the *Fix the upstream dependency conflict* we need uninstall and reinstall the @wordpress/scripts package, then execute in terminal the following command:
 
-```shell-script
+```bash
 npm remove @wordpress/scripts && npm install @wordpress/scripts --save-dev
 ```
 
@@ -59,7 +59,7 @@ It's a personal preference, I'm like have all sources in the `src` folder.
 
 To do this run:
 
-```shell-script
+```bash
 mkdir ./src/
 mv ./sass/ ./src/scss/
 ```
@@ -70,13 +70,13 @@ mv ./sass/ ./src/scss/
 
 In this repository there are a bare minimum `webpack.config.js` that allows to you start to work in your theme, you can download [here](https://raw.githubusercontent.com/jprieton/underscore-webpack/main/webpack.config.js) and put it on your root theme directory or run the following command:
 
-```shell-script
+```bash
 curl -o webpack.config.js https://raw.githubusercontent.com/jprieton/underscores-webpack/main/webpack.config.js
 ```
 
 Please read this about the `CleanWebpackPlugin`.
 
-In this file pay attention on the initialization of `MiniCssExtractPlugin`, this configuration allow creates the `style.css` file in the root directory of the theme, any other will be created in the `dist` directory (o any other that you configure in the `BUILD_DIR`)
+In this file pay attention on the initialization of `MiniCssExtractPlugin`, this configuration allow creates the `style.css` and `woocommerce.css` files in the root directory of the theme, any other will be created in the `dist` directory (o any other that you configure in the `BUILD_DIR`)
 
 if you check *WooCommerce boilerplate* option when you generate your theme, uncomment the `woocomerce` entry point
 
@@ -86,7 +86,7 @@ if you check *WooCommerce boilerplate* option when you generate your theme, unco
 
 In this repository there are a bare minimum `postcss.config.js`, you can download [here](https://raw.githubusercontent.com/jprieton/underscores-webpack/main/postcss.config.js) and put it on your root theme directory or run the following command:
 
-```shell-script
+```bash
 curl -o postcss.config.js https://raw.githubusercontent.com/jprieton/underscores-webpack/main/postcss.config.js
 ```
 
@@ -132,7 +132,7 @@ And that's is all, you must be capable of run any of the scripts without issues.
 
 ## Generate entry poitns
 
-In the `webpack.config.js` file there are two entry points `styles` and `woocommerce` (commented, uncomment if you check *WooCommerce boilerplate* option when you generate your theme), we need create the files associated to these entry points
+In the `webpack.config.js` file there are two entry points, `styles` and `woocommerce`, we need create the files associated to these entry points executing in terminal the following commands:
 
 ```bash
 # Create the required directories
@@ -145,19 +145,21 @@ echo "import '../scss/woocommerce.scss';" > ./src/js/woocommerce.js
 
 <br>
 
-## `CleanWebpackPlugin` workaround
+## `CleanWebpackPlugin` workaround 
 
-Since the build folder in our webpack.config.js is same the root of our theme, enable `CleanWebpackPlugin` with default configuration all files and folders in your theme will be deleted! (`.git` folder is erased too!), it's necessary define what folder the plugin can clean
+> **Important notes**: This step it is not required if you starts a clean installation of _s theme and download the `webpack.config.js` from this repository, but if you are working in a preexistent theme, please read carefully this instructions, make a backup and double check the configuration of the *CleanWebpackPlugin* before run webpack
+
+ Since the build folder in our `webpack.config.js` is same the root of our theme, enable `CleanWebpackPlugin` with default configuration all files and folders in your theme will be deleted! (`.git` folder is erased too!), it's necessary define what folder the plugin can clean, in our `webpack.config.js` are ready 
 
 ```js
-	new CleanWebpackPlugin({
-		cleanStaleWebpackAssets: true,
-		verbose: true, // Optional
-		cleanOnceBeforeBuildPatterns: [
-			"*.map",      // Allow clean style.map file from root folder
-			"dist/**/**", // Allow clean dist folder recursively
-		]
-	}),
+new CleanWebpackPlugin({
+    cleanStaleWebpackAssets: true,
+    verbose: true, // Optional
+    cleanOnceBeforeBuildPatterns: [
+        "*.map",      // Allow clean style.map file from root folder
+        "dist/**/**", // Allow clean dist folder recursively
+    ]
+}),
 ```
 
 You can read in detail how to configure this plugin and other options [here](https://github.com/johnagan/clean-webpack-plugin), please take a look if you are no sure about your configuration is safe or if you need check if all is OK.
