@@ -1,6 +1,6 @@
 # Enable webpack 5.x in underscore based theme 
 
-This guide allows to you use webpack 5.x with `_s`, we need update only the `@wordpress/scripts` package and do some adjusts. 
+This guide allows to you use webpack 5.x with `_s`, we need do some adjusts. 
 
 Please read the entire guide carefully to understand the steps involved in this change, you can find a link to a bash script for the automation of these tasks at the end of this document, additionally you can see the source code of this script [here](https://github.com/jprieton/underscore-webpack/blob/main/enable-webpack.sh).
 
@@ -12,7 +12,7 @@ Please read the entire guide carefully to understand the steps involved in this 
 >
 > This guide only cover the SASS watcher, other topics, as bundle scripts, are treated superficially.
 >
-> Is required to update the the bundled version of [@wordpress/scripts](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/), before following the steps in this guide, please check if your project requires that version. 
+> Maybe is required to update the bundled version of [@wordpress/scripts](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/) if your theme uses a version prior to 18.0.0, before following the steps in this guide, please check if your project requires that version. 
 >
 > Isn't recommended for ongoing projects, please go to caution if you want apply to an ongoing project, if you use [CleanWebpackPlugin](https://github.com/johnagan/clean-webpack-plugin) you will lose your files without a minimum configuration, further in this guide I will explain to avoid this in detail.
 
@@ -43,21 +43,27 @@ npm install
 <br>
 
 
-## Update the packages
+## Update @wordpress/scripts (optional)
 
-The current installation of `_s` have as dependency the [@wordpress/scripts](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/), this version uses webpack 4.x, we need update to latest version to use webpack 5.x in our project, to do this and avoid the *Fix the upstream dependency conflict* we need uninstall and reinstall the @wordpress/scripts package, then execute in terminal the following command:
+> **Note**
+>
+> Latest version of underscores uses the 19.2.2 version of @wordpress/scripts
+
+This step is required only if you have an installation of `_s` that uses [@wordpress/scripts](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/) prior to 18.0.0, in a clean install this step is not required
+
+If you have as dependency the [@wordpress/scripts](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/) prior to version 18.0.0, this version uses webpack 4.x, we need update to more recent version to use webpack 5.x in our project, (recommended 19.2.2, already tested in this guide) to do this and avoid the *Fix the upstream dependency conflict* we need uninstall and reinstall the @wordpress/scripts package, then execute in terminal the following command:
 
 ```bash
-npm remove @wordpress/scripts && npm install @wordpress/scripts --save-dev
+npm remove @wordpress/scripts && npm install @wordpress/scripts@19.2.2 --save-dev
 ```
 
-Yes, only a package is required to be updated.
+Yes, in this case, only a package is required to be updated.
 
 <br>
 
 ## Move the `sass` folder
 
-It's a personal preference, I'm like have all sources in the `src` folder.
+It's a personal preference, I'm prefer have all sources in the `src` folder.
 
 To do this run:
 

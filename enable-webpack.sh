@@ -1,8 +1,9 @@
 # First, install all dependencies
 npm install
 
+# This step it's no longer needed, but it's here just in case
 # Then, update the @wordpress/scripts package to the latest version
-npm remove @wordpress/scripts && npm install @wordpress/scripts --save-dev
+# npm remove @wordpress/scripts && npm install @wordpress/scripts --save-dev
 
 # Move the sass folder to the src folder
 mkdir -p ./src/
