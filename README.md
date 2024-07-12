@@ -48,6 +48,7 @@ npm install
 > **Note**
 >
 > Latest version of underscores uses the 19.2.2 version of @wordpress/scripts
+> 
 > This step not included in the bash file
 
 This step is required only if you have an installation of `_s` that uses [@wordpress/scripts](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/) prior to 18.0.0, in a clean install this step is not required
